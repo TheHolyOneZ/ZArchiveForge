@@ -1,0 +1,31 @@
+
+
+.jobctl {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jobctl .btn {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.jobctl-cancel {
+  color: var(--danger);
+  border-color: var(--border-strong);
+}
+.jobctl-cancel:hover {
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+}
+
+
+.jobctl .btn-ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-muted);
+}
+.jobctl .btn-ghost:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}

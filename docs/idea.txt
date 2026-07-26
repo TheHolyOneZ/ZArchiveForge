@@ -1,0 +1,38 @@
+================================================================================
+PROJECT IDEA: ZArchiveForge (Working Title)
+================================================================================
+
+CORE Requirements
+-----------------
+Rust, Tauri, React, TS/TSX + PNPM  
+License: GPL 3.0 
+
+OVERVIEW
+--------
+A fast, lightweight, offline desktop utility for creating password-protected
+archives (ZIP/RAR) and recovering access to encrypted archives using dictionary 
+or brute-force attacks.
+
+CORE FEATURES
+-------------
+
+1. Archive Creator & Encryptor
+   - Select files or folders to compress into ZIP or RAR formats.
+   - Set custom passwords with standard/AES encryption to secure archives.
+   - Simple drag-and-drop workflow to pack and protect files instantly.
+
+2. Archive Recovery & Password Cracker
+   - Open and test password-protected ZIP and RAR files.
+   - Dictionary Attack: Import wordlists (like text files) to test known passwords.
+   - Brute-Force / Mask Attack: Automatically generate character combinations 
+     (e.g., lowercase, uppercase, digits, symbols, custom lengths) to find missing 
+     passwords.
+   - Real-time performance tracking: Passwords per second (P/s), progress percentage, 
+     elapsed time, and estimated time remaining (ETA).
+   - Pause & Resume: Save recovery progress to continue long-running jobs later.
+
+GUI & EXPERIENCE
+----------------
+- Modern, clean desktop interface (Tauri v2 + React).
+- Dark-mode first design.
+- 100% offline, local-first operation with zero network calls or tracking.

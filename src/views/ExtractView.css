@@ -1,0 +1,18 @@
+
+
+.extract {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 780px;
+}
+
+.extract .reveal-btn {
+  margin-left: 10px;
+  padding: 3px 8px;
+  font-size: 12px;
+}
+
+.extract .result {
+  flex-wrap: wrap;
+}

@@ -1,0 +1,76 @@
+
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0a0c11;
+  --bg-elevated: #12151d;
+  --bg-sunken: #070810;
+  --surface: #171b26;
+  --surface-hover: #1f2431;
+  --border: #232838;
+  --border-strong: #333a4e;
+
+  --text: #eef2f9;
+  --text-muted: #98a2b6;
+  --text-faint: #667085;
+
+  --accent: #8b9bff;
+  --accent-strong: #6366f1;
+  --accent-contrast: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent-strong) 16%, transparent);
+  --accent-gradient: linear-gradient(135deg, #7c85ff 0%, #9b6cff 100%);
+
+  --success: #34d399;
+  --success-soft: color-mix(in srgb, #34d399 16%, transparent);
+  --warn: #fbbf24;
+  --warn-soft: color-mix(in srgb, #fbbf24 16%, transparent);
+  --danger: #f87171;
+  --danger-soft: color-mix(in srgb, #f87171 16%, transparent);
+
+  --radius-lg: 14px;
+  --radius: 10px;
+  --radius-sm: 7px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.5);
+  --ring: 0 0 0 3px var(--accent-soft);
+
+  --sidebar-w: 216px;
+  --titlebar-h: 40px;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f4f6fb;
+  --bg-elevated: #ffffff;
+  --bg-sunken: #e9edf4;
+  --surface: #ffffff;
+  --surface-hover: #eef2f9;
+  --border: #e2e7f0;
+  --border-strong: #cdd4e0;
+
+  --text: #131722;
+  --text-muted: #566072;
+  --text-faint: #8b93a3;
+
+  --accent: #5b63e6;
+  --accent-strong: #4f46e5;
+  --accent-contrast: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent-strong) 12%, transparent);
+  --accent-gradient: linear-gradient(135deg, #5b63e6 0%, #7c5cff 100%);
+
+  --success: #059669;
+  --success-soft: color-mix(in srgb, #059669 12%, transparent);
+  --warn: #b45309;
+  --warn-soft: color-mix(in srgb, #d97706 14%, transparent);
+  --danger: #dc2626;
+  --danger-soft: color-mix(in srgb, #dc2626 12%, transparent);
+
+  --shadow-sm: 0 1px 2px rgba(20, 30, 50, 0.08);
+  --shadow: 0 8px 24px rgba(20, 30, 50, 0.1);
+  --shadow-lg: 0 18px 44px rgba(20, 30, 50, 0.14);
+  --ring: 0 0 0 3px var(--accent-soft);
+}

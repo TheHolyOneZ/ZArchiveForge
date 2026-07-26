@@ -1,0 +1,212 @@
+
+
+.jobcard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.jobcard-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  padding: 2px;
+  margin: -2px;
+  border-radius: var(--radius-sm);
+}
+
+.jobcard-head:hover {
+  background: var(--surface-hover);
+}
+
+.jobcard-chevron {
+  flex: none;
+  color: var(--text-faint);
+  transition: transform 0.15s ease;
+}
+.jobcard-chevron.open {
+  transform: rotate(180deg);
+}
+
+.jobcard-title {
+  margin-right: auto;
+}
+
+.jobcard-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.jobcard-attack {
+  font-weight: 600;
+}
+
+.jobcard-archive {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+}
+.status-pill.s-running {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border-strong));
+}
+.status-pill.s-paused {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, var(--border-strong));
+}
+.status-pill.s-found {
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 50%, var(--border-strong));
+}
+.status-pill.s-error {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, var(--border-strong));
+}
+
+.found-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--success) 12%, var(--bg-sunken));
+  border: 1px solid color-mix(in srgb, var(--success) 40%, var(--border));
+}
+
+.found-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.found-pw {
+  flex: 1;
+  min-width: 120px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 14px;
+  padding: 6px 10px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  word-break: break-all;
+}
+
+.found-copy {
+  padding: 6px 12px;
+}
+
+.job-msg {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+}
+.job-msg.err {
+  color: var(--danger);
+  word-break: break-word;
+}
+
+.jobcard-foot {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.jobcard-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px 18px;
+  margin: 0;
+}
+
+.detail-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.detail-row dt {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  flex: none;
+  width: 66px;
+}
+
+.detail-row dd {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-row dd.mono {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12.5px;
+}
+
+.recent-head {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  margin-bottom: 7px;
+}
+
+.recent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 96px;
+  overflow-y: auto;
+}
+
+.recent-chip {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 2px 7px;
+  white-space: pre;
+}

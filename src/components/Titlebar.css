@@ -1,0 +1,113 @@
+
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  height: var(--titlebar-h);
+  flex: none;
+  background: var(--bg-sunken);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  padding: 0 4px;
+}
+
+.tb-spacer {
+  flex: 1;
+  align-self: stretch;
+}
+
+
+.tb-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  height: 100%;
+  color: var(--text);
+}
+
+.tb-brand-mark {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.tb-brand-name {
+  font-size: 12.5px;
+  font-weight: 640;
+  letter-spacing: -0.01em;
+}
+
+.os-mac .tb-brand {
+  padding-left: 6px;
+}
+
+
+.tb-controls.win {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.tb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: var(--titlebar-h);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.tb-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.tb-btn.close:hover {
+  background: #e5484d;
+  color: #fff;
+}
+
+
+.tb-controls.mac {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 0 6px;
+}
+
+.tb-light {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.55);
+  opacity: 0.95;
+}
+
+
+.tb-controls.mac .tb-light svg {
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+.tb-controls.mac:hover .tb-light svg {
+  opacity: 1;
+}
+
+.tb-light.close {
+  background: #ff5f57;
+}
+.tb-light.min {
+  background: #febc2e;
+}
+.tb-light.max {
+  background: #28c840;
+}
