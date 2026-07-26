@@ -141,8 +141,10 @@ Plus:
 
 ## ⬇ Download
 
-Prebuilt installers for **Windows, macOS (Intel & Apple Silicon), and Linux** are on the
-official page:
+> [!IMPORTANT]
+> **Prebuilt installers are available only on the official website — not on GitHub.**
+> This repository hosts the **source code**; there are no binaries in GitHub Releases. Download the
+> ready-to-run installers from:
 
 ### 👉 **[zsync.eu/zarchiveforge](https://zsync.eu/zarchiveforge/)**
 
@@ -152,7 +154,8 @@ official page:
 | **macOS** | `.dmg` (Apple Silicon & Intel) |
 | **Linux** | `.AppImage` · `.deb` · `.rpm` |
 
-Every release ships with a `SHA256SUMS.txt` so you can verify your download.
+Every download on the site ships with a `SHA256SUMS.txt` so you can verify it. Prefer not to trust a
+prebuilt binary? [Build it yourself](#-build-from-source) from this source — that's what GitHub is for.
 
 > **macOS note:** builds are ad-hoc signed. On first launch you may need to right-click → **Open**
 > (or allow it in *System Settings → Privacy & Security*).

@@ -1,37 +1,22 @@
 name: Build ZArchiveForge Artifacts
 
 on:
+  # Manual only. Pushing to the repo never starts a build — run this yourself
+  # from the Actions tab (or `gh workflow run`) when you actually want installers.
   workflow_dispatch:
-    inputs:
-      release_tag:
-        description: "Release tag to upload the binaries to (must already exist)"
-        required: false
-        default: "0.1.0"
-  push:
-    branches: [main, master]
-    paths:
-      - "src/**"
-      - "src-tauri/**"
-      - "public/**"
-      - "index.html"
-      - "package.json"
-      - "pnpm-lock.yaml"
-      - "vite.config.ts"
-      - "tsconfig.json"
-      - ".github/workflows/build.yml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'push' }}
+  cancel-in-progress: false
 
+# Binaries are published as build artifacts (owner-only, expiring) — NOT as a
+# public GitHub Release. The official downloads live on zsync.eu/zarchiveforge/.
 permissions:
-  contents: write
+  contents: read
 
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: short
-
-  RELEASE_TAG: ${{ github.event.inputs.release_tag || '0.1.0' }}
 
   COREPACK_ENABLE_AUTO_PIN: "0"
   COREPACK_ENABLE_STRICT: "0"
@@ -89,14 +74,14 @@ jobs:
           Write-Host "=== Bundle directory tree ==="
           Get-ChildItem -Recurse src-tauri/target -Directory -Filter bundle -ErrorAction SilentlyContinue | Select-Object FullName
 
-      - name: Publish Windows binaries to the release
-        uses: softprops/action-gh-release@v2
+      - name: Upload Windows binaries as build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          files: |
+          name: windows-x64
+          if-no-files-found: error
+          path: |
             src-tauri/target/**/release/bundle/**/*.exe
             src-tauri/target/**/release/bundle/**/*.msi
-          fail_on_unmatched_files: true
 
 
   build-macos-intel:
@@ -151,12 +136,12 @@ jobs:
           echo "=== Bundle directory tree ==="
           find src-tauri/target -type d -name bundle 2>/dev/null || echo "(no bundle dirs)"
 
-      - name: Publish macOS Intel binary to the release
-        uses: softprops/action-gh-release@v2
+      - name: Upload macOS Intel binary as build artifact
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          files: src-tauri/target/**/release/bundle/**/*.dmg
-          fail_on_unmatched_files: true
+          name: macos-intel
+          if-no-files-found: error
+          path: src-tauri/target/**/release/bundle/**/*.dmg
 
 
   build-macos-silicon:
@@ -208,12 +193,12 @@ jobs:
           echo "=== Bundle directory tree ==="
           find src-tauri/target -type d -name bundle 2>/dev/null || echo "(no bundle dirs)"
 
-      - name: Publish macOS Apple Silicon binary to the release
-        uses: softprops/action-gh-release@v2
+      - name: Upload macOS Apple Silicon binary as build artifact
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          files: src-tauri/target/**/release/bundle/**/*.dmg
-          fail_on_unmatched_files: true
+          name: macos-silicon
+          if-no-files-found: error
+          path: src-tauri/target/**/release/bundle/**/*.dmg
 
 
   build-linux:
@@ -282,37 +267,45 @@ jobs:
           echo "=== Bundle directory tree ==="
           find src-tauri/target -type d -name bundle 2>/dev/null || echo "(no bundle dirs)"
 
-      - name: Publish Linux binaries to the release
-        uses: softprops/action-gh-release@v2
+      - name: Upload Linux binaries as build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          files: |
+          name: linux-x64
+          if-no-files-found: error
+          path: |
             src-tauri/target/**/release/bundle/**/*.deb
             src-tauri/target/**/release/bundle/**/*.AppImage
             src-tauri/target/**/release/bundle/**/*.rpm
-          fail_on_unmatched_files: true
 
 
-  checksums:
-    name: Generate SHA-256 checksums
+  bundle:
+    name: Bundle binaries + checksums for the website
     needs: [build-windows, build-macos-intel, build-macos-silicon, build-linux]
     runs-on: ubuntu-22.04
     if: always() && !cancelled()
-    permissions:
-      contents: write
 
     steps:
-      - name: Download release binaries, checksum, and re-upload
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release
+          merge-multiple: true
+
+      - name: Generate SHA-256 checksums
         run: |
-          mkdir -p release && cd release
-          gh release download "$RELEASE_TAG" -R "$GITHUB_REPOSITORY" \
-            --pattern '*.exe' --pattern '*.msi' --pattern '*.dmg' \
-            --pattern '*.deb' --pattern '*.rpm' --pattern '*.AppImage' \
-            --clobber
+          cd release
           echo "=== release/ ==="
           ls -lah
           (sha256sum *.msi *.exe *.dmg *.deb *.rpm *.AppImage 2>/dev/null || true) > SHA256SUMS.txt
+          echo "=== SHA256SUMS.txt ==="
           cat SHA256SUMS.txt
-          gh release upload "$RELEASE_TAG" SHA256SUMS.txt -R "$GITHUB_REPOSITORY" --clobber
+
+      # One downloadable artifact with everything, ready to drop into the
+      # website's zarchiveforge/releases/ folder. Downloadable from the
+      # Actions run page (owner-only) — never published as a public release.
+      - name: Upload website release bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: zarchiveforge-website-release
+          if-no-files-found: error
+          path: release/**
