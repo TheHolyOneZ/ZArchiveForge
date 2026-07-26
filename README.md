@@ -1,3 +1,5 @@
+> Some commits are authored as AstroDev9111, an alternate account of the same author (TheHolyOneZ).
+
 <div align="center">
 
 <img src="src-tauri/icons/128x128.png" alt="ZArchiveForge" width="112" height="112" />
